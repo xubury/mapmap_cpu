@@ -298,7 +298,7 @@ select_random_roots(
                 this->m_component_lists[c].size() / num_nodes)));
 
         /* select a color at random with >= c_k nodes */
-	feasible_colors.assign(num_colors, 0);
+        feasible_colors.assign(num_colors, 0);
 
         /* count nodes per color */
         for(const luint_t n : this->m_component_lists[c])
