@@ -47,7 +47,7 @@ endif(BUILD_MEMSAVE)
 
 # if DEMO is built, download a demo dataset (planesweep)
 if(BUILD_DEMO)
-	file(DOWNLOAD http://download.hrz.tu-darmstadt.de/media/FB20/GCC/project_files/mapmap/planesweep_320_256_96.bin ${PROJECT_SOURCE_DIR}/demo/planesweep_320_256_96.bin)
+	#file(DOWNLOAD http://download.hrz.tu-darmstadt.de/media/FB20/GCC/project_files/mapmap/planesweep_320_256_96.bin ${PROJECT_SOURCE_DIR}/demo/planesweep_320_256_96.bin)
 endif(BUILD_DEMO)
 
 # find location to TBB and set variables
@@ -238,7 +238,9 @@ add_executable(mapmap_test
     ${src_test})
 add_dependencies(mapmap_test googletest)
 target_link_libraries(mapmap_test
-    ${TBB_LIBRARIES}
+    TBB::tbbmalloc_proxy
+    TBB::tbbmalloc 
+    TBB::tbb
     gtest
     gtest_main
     pthread)
@@ -255,5 +257,7 @@ if(BUILD_TEST)
 endif(BUILD_TEST)
 
 target_link_libraries(mapmap_demo
-    ${TBB_LIBRARIES})
+   TBB::tbbmalloc_proxy
+   TBB::tbbmalloc
+   TBB::tbb)
 endif(BUILD_DEMO)
